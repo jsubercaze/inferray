@@ -32,7 +32,7 @@ Export as a Jena Model :
 Then use the OntModel as usual with Jena. Inferray performs incremental inference when new triples are added and restart
 a full inference 
 
-## Configuration =
+## Configuration
 
 You can configure advanced parameters of Inferray using the Configuration Builder. Parameters are self explanatory and listed in the following snippet : 
 
