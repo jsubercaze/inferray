@@ -2,7 +2,6 @@ package fr.ujm.tse.satin.inferray.test.dictionary;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -45,11 +44,7 @@ public class NodeDictionaryTest {
 		assertEquals(rs + 1, dictionary.countProperties());
 	}
 
-	@Test(expected=NullPointerException.class)
-	public void testGetLong() {
-		final String s = dictionary.get(NodeDictionary.SPLIT_INDEX+1);
-		assertNotNull(s);
-	}
+
 
 	@Test
 	public void testGetString() {

@@ -35,15 +35,10 @@
 	</repositories>
 	<distributionManagement>
 		<repository>
-			<id>satin-artifactory</id>
-			<name>satin-releases</name>
-			<url>http://10.20.0.55:8081/artifactory/satin-public</url>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
-		<snapshotRepository>
-			<id>satin-artifactory</id>
-			<name>satin-snapshots</name>
-			<url>http://10.20.0.55:8081/artifactory/satin-public</url>
-		</snapshotRepository>
 	</distributionManagement>
 	<dependencies>
 		<dependency>
