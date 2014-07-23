@@ -13,6 +13,8 @@ Inferray can be used either as a standalone reasoner (project inferray-core) or 
 
 ### Standalone
 
+Instantiate the reasoner, load an ontology and process the inference.
+
     Inferray inferray = new Inferray();
     inferray.parse(myOntology);
     inferray.process();
@@ -29,6 +31,19 @@ Export as a Jena Model :
 				
 Then use the OntModel as usual with Jena. Inferray performs incremental inference when new triples are added and restart
 a full inference 
+
+## Configuration =
+
+You can configure advanced parameters of Inferray using the Configuration Builder. Parameters are self explanatory and listed in the following snippet : 
+
+    final ConfigurationBuilder builder = new ConfigurationBuilder();
+    final PropertyConfiguration config = builder
+					.setDumpFileOnExit(false).setForceQuickSort(false)
+					.setMultithread(true).setThreadpoolSize(8)
+					.setFastClosure(true)
+					.setRulesProfile(SupportedProfile.RDFSPLUS)
+					.setDumpFileOnExit(false).build();
+    final Inferray inferray = new Inferray(config);
 
 ## Maven dependencies
 
