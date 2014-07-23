@@ -1,0 +1,22 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:prptrp="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+   <owl:TransitiveProperty rdf:ID="#SousClasse"/>
+ 
+<rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#Humain">
+   <prptrp:SousClasse rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#Animal"/>
+   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+ </rdf:Description>
+ <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#Animal">
+   <prptrp:SousClasse rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#LivingThing"/>
+ </rdf:Description>
+ <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#LivingThing">
+  <prptrp:SousClasse rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#Thing"/>
+ </rdf:Description>
+ <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/prptrp#SousClasse">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+ </rdf:Description>
+ </rdf:RDF> 

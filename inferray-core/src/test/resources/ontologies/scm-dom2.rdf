@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:caxsco="http://www.semanticweb.org/jules/ontologies/2013/6/cax-sco#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/cax-sco#isHuman">
+    <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/cax-sco#isAnimal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+     </rdf:Description>
+ <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/cax-sco#isAnimal">
+     <rdfs:domain rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/cax-sco#Animal"/>
+ </rdf:Description>
+ </rdf:RDF> 

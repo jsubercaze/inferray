@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.ujm.tse.lt2c.satin</groupId>
+	<artifactId>inferray</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Inferray</name>
+	<description>Parent maven project for inferray</description>
+	<developers>
+		<developer>
+			<id>jsubercaze</id>
+			<name>Julien Subercaze</name>
+			<email>subercaze.julien@gmail.com</email>
+			<url>http://satin-ppl.telecom-st-etienne.fr/jsubercaze/</url>
+			<organization>Télécom Saint-Etienne / Télécom Sud-Paris</organization>
+			<organizationUrl>http://satin-ppl.telecom-st-etienne.fr/</organizationUrl>
+			<roles>
+				<role>researcher</role>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	<modules>
+		<module>inferray-bindings</module>
+		<module>inferray-core</module>
+		<module>inferray-correctness</module>
+	</modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

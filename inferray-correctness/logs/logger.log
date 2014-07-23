@@ -1,0 +1,18 @@
+[13:50:47] [INFO ] (FullFileRIOTParser.java:parse:38) Parsing c:/libs/inferray/subClassOf10.nt
+[13:50:48] [INFO ] (FullFileRIOTParser.java:parse:71) Time for parsing 1077 ms
+[13:50:48] [INFO ] (FullFileRIOTParser.java:parse:73) Triplestore size79
+[13:50:48] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
+[13:50:48] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483644
+[13:50:48] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 15
+[13:50:48] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
+[13:50:48] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 6
+[13:50:48] [INFO ] (Inferray.java:startup:392) Size after recounting 131
+[13:50:48] [INFO ] (Inferray.java:firstInferenceCycle:574) Skipped subproperty closure
+[13:50:48] [INFO ] (Inferray.java:firstInferenceCycle:566) Skipped subclassof closure
+[13:50:48] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
+[13:50:48] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
+[13:50:48] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
+[13:50:48] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
+[13:50:48] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
+[13:50:48] [INFO ] (Inferray.java:displayInfo:547) 9 iterations - Inference time 115 ms
+[13:50:48] [INFO ] (Inferray.java:displayInfo:549) Inferred 136 in 9 iterations

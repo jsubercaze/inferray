@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+extraProperties=sonar.host.url\=http\://localhost\:9000\r\nsonar.jdbc.password\=sonar\r\nsonar.jdbc.url\=jdbc\:h2\:tcp\://localhost\:9092/sonar\r\nsonar.jdbc.username\=sonar
+projectKey=fr.ujm.tse.lt2c.satin\:inferray-core
+serverUrl=http\://localhost\:9000
+version=2

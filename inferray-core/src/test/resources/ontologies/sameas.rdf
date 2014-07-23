@@ -1,0 +1,18 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:caxsco="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Humain">
+    <owl:sameAs rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Human"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Animal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+ </rdf:Description>
+     <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Michel">
+     <rdf:type rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Humain"/>
+ </rdf:Description>
+  <rdf:Description rdf:about="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Human">
+     <owl:sameAs rdf:resource="http://www.semanticweb.org/jules/ontologies/2013/6/sameastest#Mensch"/>
+  </rdf:Description>
+ </rdf:RDF> 
