@@ -32,6 +32,10 @@
 			<id>Apache Snapshot</id>
 			<url>https://repository.apache.org/content/groups/snapshots/</url>
 		</repository>
+		<repository>
+			<id>stixar-mvn-repo</id>
+			<url>https://raw.github.com/jsubercaze/stixar-graphlib/mvn-repo/</url>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
@@ -43,8 +47,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.stixar</groupId>
-			<artifactId>graphs</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<artifactId>graphlib</artifactId>
+			<version>0.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
