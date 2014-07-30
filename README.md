@@ -42,7 +42,7 @@ You can configure advanced parameters of Inferray using the Configuration Builde
 					.setMultithread(true).setThreadpoolSize(8)
 					.setFastClosure(true)
 					.setRulesProfile(SupportedProfile.RDFSPLUS)
-					.setDumpFileOnExit(false).build();
+					.build();
     final Inferray inferray = new Inferray(config);
 
 ## Maven dependencies
