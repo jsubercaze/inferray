@@ -3,7 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.ujm.tse.lt2c.satin</groupId>
 	<artifactId>inferray-core</artifactId>
-	<version>0.1.4-SNAPSHOT</version>
+	<parent>
+		<groupId>fr.ujm.tse.lt2c.satin</groupId>
+		<artifactId>inferray</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+	</parent>
 	<name>Inferray-core</name>
 	<description>Heart of Inferray</description>
 	<organization>

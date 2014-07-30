@@ -34,7 +34,7 @@ import fr.ujm.tse.lt2c.satin.inferray.rules.AbstractFastRule;
  * <pre>
  *  _________________
  * |s1,p1,o1,s2,p2,o2|
- * ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+ * -------------------
  *  0  _  1  2  3  4
  * </pre>
  *

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>fr.ujm.tse.lt2c.satin</groupId>
 		<artifactId>inferray</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>inferray-correctness</artifactId>
 	<name>Correctness</name>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>fr.ujm.tse.lt2c.satin</groupId>
 			<artifactId>inferray-bindings</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -29,4 +29,7 @@
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 	</distributionManagement>
+	<!-- <build> <plugins> <plugin> <groupId>com.github.github</groupId> <artifactId>site-maven-plugin</artifactId> 
+		<version>0.9</version> <configuration> <skip>true</skip> </configuration> 
+		</plugin> </plugins> </build> -->
 </project>
