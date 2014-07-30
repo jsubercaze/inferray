@@ -74,7 +74,7 @@ To load only the core engine :
     <dependency>
       <groupId>fr.ujm.tse.lt2c.satin</groupId>
       <artifactId>inferray-core</artifactId>
-      <version>0.0.1</version>
+      <version>0.1.4-SNAPSHOT</version>
     </dependency>
     
 ## Correctness
