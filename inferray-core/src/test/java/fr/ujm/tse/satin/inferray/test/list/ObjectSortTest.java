@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 
 public class ObjectSortTest {
@@ -29,15 +30,15 @@ public class ObjectSortTest {
 
 	@Test
 	public void test() {
-		LongPairArrayList l = new LongPairArrayList(arrayToSort);
+		LongPairArrayList l = new LongPairArrayList(arrayToSort,SortingAlgorithm.MSD);
 		l=l.objectSortedCopy();
 
 		assertArrayEquals(l.elements(), arraySorted);
-		l = new LongPairArrayList(arrayToSort2);
+		l = new LongPairArrayList(arrayToSort2,SortingAlgorithm.MSD);
 		l=l.objectSortedCopy();
 
 		assertArrayEquals(l.elements(), arraySorted2);
-		l = new LongPairArrayList(arrayToSort3);
+		l = new LongPairArrayList(arrayToSort3,SortingAlgorithm.MSD);
 		l=l.objectSortedCopy();
 
 		assertArrayEquals(l.elements(), arraySorted3);

@@ -1,16 +1,17 @@
 package fr.ujm.tse.lt2c.satin.inferray.configuration;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.rules.profile.SupportedProfile;
 
 /**
  * Default values when no configuration is given
- *
+ * 
  * @author Julien Subercaze
- *
+ * 
  *         Jan. 2014
- *
+ * 
  */
-public class DefaultConfiguration implements MyConfiguration {
+public class DefaultConfiguration implements InferrayConfiguration {
 
 	private SupportedProfile supportedProfile = SupportedProfile.RDFSPLUS;
 
@@ -63,6 +64,11 @@ public class DefaultConfiguration implements MyConfiguration {
 	@Override
 	public boolean exportSupport() {
 		return false;
+	}
+
+	@Override
+	public SortingAlgorithm getSortingAlgorithm() {
+		return SortingAlgorithm.HYBRID_IMD;
 	}
 
 }

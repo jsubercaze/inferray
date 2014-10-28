@@ -48,7 +48,7 @@ public class ClassGammaRule extends AbstractFastRule {
 	 * <pre>
 	 *  _________________
 	 * |s1,p1,o1,s2,p2,o2|
-	 * ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 *  0  -  1  2  -  3
 	 * </pre>
 	 */
@@ -85,7 +85,7 @@ public class ClassGammaRule extends AbstractFastRule {
 		// Number of inferred triples
 		int newTriples = 0;
 		//
-		final LongPairArrayList output = new LongPairArrayList();
+
 
 		// Get the data for first part
 		final LongPairArrayList list1 = ts1.getbyPredicate(ruleProperty);
@@ -100,7 +100,7 @@ public class ClassGammaRule extends AbstractFastRule {
 		long previous = -1;
 		final long[] values = new long[4];
 		int sizeLastAdd = 0;
-
+		final LongPairArrayList output = new LongPairArrayList(list1.getSortingAlgorithm());
 		// Array traversal
 		for (int i = 0; i < list1.size(); i++) {
 			values[0] = list1.getQuick(i);

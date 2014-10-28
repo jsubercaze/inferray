@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
@@ -73,10 +74,13 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 	 * <code>null</code>. Reduce scan time of the array
 	 */
 	int maxActiveProperty;
+	private final SortingAlgorithm algorithm;
 
-	public SortedCacheObliviousTripleStore(final int props) {
+	public SortedCacheObliviousTripleStore(final int props,
+			final SortingAlgorithm sortingAlgorithm) {
 		properties = new LongPairArrayList[props];
 		maxActiveProperty = 0;
+		this.algorithm = sortingAlgorithm;
 	}
 
 	@Override
@@ -86,7 +90,7 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 		if (properties[p] == null) {
 			// Update the max active props if required
 			maxActiveProperty = p > maxActiveProperty ? p : maxActiveProperty;
-			final LongPairArrayList list = new LongPairArrayList();
+			final LongPairArrayList list = new LongPairArrayList(algorithm);
 			list.add(s);
 			list.add(o);
 			properties[p] = list;
@@ -100,7 +104,7 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 	@Override
 	public final LongPairArrayList getAll() {
 		final LongPairArrayList allTriples = new LongPairArrayList(
-				(int) triples * 3);
+				(int) triples * 3, algorithm);
 		for (int i = 0; i < properties.length; i++) {
 			final LongPairArrayList property = properties[i];
 			if (property == null || property.isEmpty()) {
@@ -117,7 +121,8 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 
 	@Override
 	public final LongPairArrayList getbySubject(final long s) {
-		final LongPairArrayList triplesBySubject = new LongPairArrayList();
+		final LongPairArrayList triplesBySubject = new LongPairArrayList(
+				algorithm);
 		for (int i = 0; i < properties.length; i++) {
 			final LongPairArrayList property = properties[i];
 			if (property == null || property.isEmpty()) {
@@ -151,7 +156,8 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 
 	@Override
 	public final LongPairArrayList getbyObject(final long o) {
-		final LongPairArrayList triplesByObject = new LongPairArrayList();
+		final LongPairArrayList triplesByObject = new LongPairArrayList(
+				algorithm);
 		for (int i = 0; i < properties.length; i++) {
 			final LongPairArrayList property = properties[i];
 			if (property == null || property.isEmpty()) {
@@ -275,7 +281,7 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 	@Override
 	public final void replaceResourceByProperty(final long old, final int p) {
 		// Create a new Arraylist for the new property
-		final LongPairArrayList newTriples = new LongPairArrayList();
+		final LongPairArrayList newTriples = new LongPairArrayList(algorithm);
 		properties[NodeDictionary.SPLIT_INDEX - p] = newTriples;
 		// All triples will be added there
 		for (int i = 0; i < maxActiveProperty; i++) {
@@ -417,6 +423,11 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 		} else {
 			return it;
 		}
+	}
+
+	@Override
+	public SortingAlgorithm getSortingAlgorithm() {
+		return algorithm;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package fr.ujm.tse.lt2c.satin.inferray.rules.profile;
 
-import fr.ujm.tse.lt2c.satin.inferray.configuration.MyConfiguration;
+import fr.ujm.tse.lt2c.satin.inferray.configuration.InferrayConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.AbstractDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
@@ -28,7 +28,7 @@ class RDFSRuleProfile extends AbstractRulesProfile {
 	public RDFSRuleProfile(final NodeDictionary dictionary,
 			final CacheTripleStore mainTripleStore,
 			final CacheTripleStore usableTriples,
-			final CacheTripleStore outputTriples, final MyConfiguration config) {
+			final CacheTripleStore outputTriples, final InferrayConfiguration config) {
 		super(dictionary, mainTripleStore, usableTriples, outputTriples);
 		// Add axiomatic triples to the triple stores
 		initializeAxiomaticTriples(config);
@@ -45,7 +45,7 @@ class RDFSRuleProfile extends AbstractRulesProfile {
 	 *
 	 * @param config
 	 */
-	private void initializeAxiomaticTriples(final MyConfiguration config) {
+	private void initializeAxiomaticTriples(final InferrayConfiguration config) {
 		mainTripleStore.add(AbstractDictionary.rdftype,
 				(int) AbstractDictionary.rdftype,
 				AbstractDictionary.rdfProperty);

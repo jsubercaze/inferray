@@ -21,24 +21,25 @@ import fr.ujm.tse.lt2c.satin.inferray.rules.AbstractFastRule;
  * <li>SCM-SPO</li>
  * <li>SCM-EQP2</li>
  * </ul>
- *
+ * 
  * All these rules have the following properties :
  * <ol>
  * <li>same predicate in both parts</li>
  * </ol>
- *
+ * 
  * Rules can be simultaneously run in the following groups :
  * <ul>
  * <li>SCM-SCO & SCM-EQC2</li>
  * <li>SCM-SPO & SCM-EQP2</li>
  * </ul>
- *
- *
- *
+ * 
+ * However transitive SCM-SPO and SCM-SCO are processed in the pre computing of
+ * transitive closures.
+ * 
  * @author Julien Subercaze
- *
+ * 
  *         Dec. 2013
- *
+ * 
  */
 public class ClassBetaRule extends AbstractFastRule {
 
@@ -118,8 +119,8 @@ public class ClassBetaRule extends AbstractFastRule {
 		// list1.objectSort();
 		list1 = list1.objectSortedCopy();
 		// 2 outputs for sub** and equivalent***
-		final LongPairArrayList output = new LongPairArrayList();
-		final LongPairArrayList outputEquivalent = new LongPairArrayList();
+		final LongPairArrayList output = new LongPairArrayList(list1.getSortingAlgorithm());
+		final LongPairArrayList outputEquivalent = new LongPairArrayList(list1.getSortingAlgorithm());
 
 		// Usual counters
 		int counter = 0;
@@ -191,7 +192,7 @@ public class ClassBetaRule extends AbstractFastRule {
 				}
 				sizeLastAdd = output.size() - sizeLastAdd;
 				if (!broke) {
-					if (i < list1.size()-1) {
+					if (i < list1.size() - 1) {
 						values[0] = list1.getQuick(i);
 						values[1] = list1.getQuick(++i);
 						while (values[0] == previous) {

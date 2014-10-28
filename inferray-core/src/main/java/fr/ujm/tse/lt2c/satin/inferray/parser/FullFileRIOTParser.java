@@ -49,6 +49,7 @@ public class FullFileRIOTParser extends AbstractJenaParser {
 					RDFDataMgr.parse(tripleStream, fileInput);
 				} catch (final Exception e) {
 					logger.error("Error while parsing "+fileInput,e);
+					System.exit(-1);
 				}
 			}
 		};

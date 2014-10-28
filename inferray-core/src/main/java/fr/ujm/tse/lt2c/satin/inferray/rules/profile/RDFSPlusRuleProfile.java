@@ -107,9 +107,6 @@ class RDFSPlusRuleProfile extends AbstractRulesProfile {
 		final boolean remaped = dictionary.hasRemapOccured();
 		final int rdfType = (int) AbstractDictionary.rdftype;
 		final long resource = AbstractDictionary.rdfsResource;
-
-
-
 		for (long i = (long)NodeDictionary.SPLIT_INDEX + 1; i < dictionary
 				.getCntResources(); i++) {
 			if (remaped && dictionary.wasRemoved(i)) {

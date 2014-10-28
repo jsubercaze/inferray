@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import fr.ujm.tse.lt2c.satin.inferray.configuration.DefaultConfiguration;
-import fr.ujm.tse.lt2c.satin.inferray.configuration.MyConfiguration;
+import fr.ujm.tse.lt2c.satin.inferray.configuration.InferrayConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.reasoner.Inferray;
 import fr.ujm.tse.lt2c.satin.inferray.rules.profile.SupportedProfile;
@@ -23,7 +23,7 @@ public class FC_PRP_TRP_TEST {
 
 	@Test
 	public void test() throws IOException {
-		final MyConfiguration config = new DefaultConfiguration();
+		final InferrayConfiguration config = new DefaultConfiguration();
 		// Enable the PRP-TRP rule
 		config.setRulesProfile(SupportedProfile.RDFSPLUS);
 		final Inferray infere = new Inferray(config);

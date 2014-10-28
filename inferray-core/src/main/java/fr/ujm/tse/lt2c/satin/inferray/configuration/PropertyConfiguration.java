@@ -1,8 +1,9 @@
 package fr.ujm.tse.lt2c.satin.inferray.configuration;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.rules.profile.SupportedProfile;
 
-public class PropertyConfiguration implements MyConfiguration {
+public class PropertyConfiguration implements InferrayConfiguration {
 	/**
 	 * Multi thread sorting operations
 	 */
@@ -13,7 +14,7 @@ public class PropertyConfiguration implements MyConfiguration {
 	int threadpoolSize = Runtime.getRuntime().availableProcessors();;
 	/**
 	 * Should it force quicksort instead of countsort ?
-	 *
+	 * 
 	 * Not advised, for testing only
 	 */
 	boolean forceQuickSort = false;
@@ -27,7 +28,7 @@ public class PropertyConfiguration implements MyConfiguration {
 	SupportedProfile rulesProfile = SupportedProfile.RDFSDEFAULT;
 	/**
 	 * Number of properties
-	 *
+	 * 
 	 * Should be removed in next version
 	 */
 	int minimalPropertyNumber = 20000;
@@ -43,6 +44,8 @@ public class PropertyConfiguration implements MyConfiguration {
 	 * Don't export triples
 	 */
 	boolean exportTriples = false;
+
+	SortingAlgorithm algorithm;
 
 	public PropertyConfiguration() {
 		super();
@@ -128,6 +131,16 @@ public class PropertyConfiguration implements MyConfiguration {
 	@Override
 	public boolean exportSupport() {
 		return this.exportTriples;
+	}
+
+	public void setSortingAlgorithm(final SortingAlgorithm algorithm) {
+		this.algorithm = algorithm;
+	}
+
+	@Override
+	public SortingAlgorithm getSortingAlgorithm() {
+
+		return algorithm;
 	}
 
 }

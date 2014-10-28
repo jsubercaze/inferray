@@ -1,49 +1,38 @@
-[23:12:23] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
-[23:12:23] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
-[23:12:23] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 2
-[23:12:23] [INFO ] (Inferray.java:startup:392) Size after recounting 5
-[23:12:23] [INFO ] (Inferray.java:firstInferenceCycle:566) Skipped subclassof closure
-[23:12:23] [INFO ] (Inferray.java:firstInferenceCycle:574) Skipped subproperty closure
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 3 _ 2
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 5 _ 2
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 7 _ 2
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 9 _ 2
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 11 _ 8
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 13 _ 16
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 15 _ 16
-[23:12:23] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
-[23:12:23] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
-[23:12:23] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 4
-[23:12:23] [INFO ] (Inferray.java:startup:392) Size after recounting 10
-[23:12:23] [INFO ] (Inferray.java:firstInferenceCycle:566) Skipped subclassof closure
-[23:12:23] [INFO ] (Inferray.java:firstInferenceCycle:574) Skipped subproperty closure
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 3 _ 4
-[23:12:23] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:23] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 5 _ 4
-[23:12:25] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
-[23:12:25] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483644
-[23:12:25] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 1977
-[23:12:25] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
-[23:12:25] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 333
-[23:12:25] [INFO ] (Inferray.java:startup:392) Size after recounting 12159
-[23:12:25] [INFO ] (Inferray.java:firstInferenceCycle:566) Skipped subclassof closure
-[23:12:25] [INFO ] (Inferray.java:firstInferenceCycle:574) Skipped subproperty closure
-[23:12:25] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:25] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:25] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 3 _ 5688
-[23:12:25] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:25] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 5 _ 7068
-[23:12:25] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:25] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 7 _ 7226
-[23:12:25] [INFO ] (Inferray.java:updateTripleStores:616) Starting update with 8 threads
-[23:12:25] [INFO ] (Inferray.java:fixPointInference:317) Fixpoint : Size 9 _ 7226
+[10:08:11] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
+[10:08:11] [INFO ] (Inferray.java:startup:363) Configurated for fast closure
+[10:08:11] [INFO ] (Inferray.java:startup:365) Fast closure is activated in the profile
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 2
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:141) New triples 2
+[10:08:11] [INFO ] (Inferray.java:startup:417) Size after recounting 5
+[10:08:11] [INFO ] (Inferray.java:firstInferenceCycle:591) Skipped subclassof closure
+[10:08:11] [INFO ] (Inferray.java:firstInferenceCycle:599) Skipped subproperty closure
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 3 _ 2
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 5 _ 2
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 7 _ 2
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 9 _ 2
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 11 _ 8
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 13 _ 16
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 15 _ 16
+[10:08:11] [INFO ] (SortedCacheObliviousTripleStore.java:sort:227) Multithread
+[10:08:11] [INFO ] (Inferray.java:startup:363) Configurated for fast closure
+[10:08:11] [INFO ] (Inferray.java:startup:365) Fast closure is activated in the profile
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:90) Computing closure for  2147483643
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:102) Triples 4
+[10:08:11] [INFO ] (FastTransitiveClosure.java:computeTransitiveClosure:141) New triples 4
+[10:08:11] [INFO ] (Inferray.java:startup:417) Size after recounting 10
+[10:08:11] [INFO ] (Inferray.java:firstInferenceCycle:591) Skipped subclassof closure
+[10:08:11] [INFO ] (Inferray.java:firstInferenceCycle:599) Skipped subproperty closure
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 3 _ 4
+[10:08:11] [INFO ] (Inferray.java:updateTripleStores:641) Starting update with 8 threads
+[10:08:11] [INFO ] (Inferray.java:fixPointInference:335) Fixpoint : Size 5 _ 4

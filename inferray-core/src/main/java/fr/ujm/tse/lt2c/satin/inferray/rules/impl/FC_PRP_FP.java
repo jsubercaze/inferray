@@ -164,7 +164,7 @@ public class FC_PRP_FP extends AbstractFastRule {
 				continue;
 			}
 			// Lazy instantiation takes finally place
-			final LongPairArrayList output = new LongPairArrayList();
+			final LongPairArrayList output = new LongPairArrayList(listMain.getSortingAlgorithm());
 			// Do the usual traversal
 			traverse(listMain, listNew, output, p);
 

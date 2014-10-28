@@ -2,6 +2,7 @@ package fr.ujm.tse.satin.inferray.test.list.sorting;
 
 import java.util.Random;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 
 public class TestSpeedIteration {
@@ -12,9 +13,12 @@ public class TestSpeedIteration {
 	public static final int MAX_VALUE = 100;
 
 	public static void main(final String[] args) {
-		final LongPairArrayList small = new LongPairArrayList(SMALL_SIZE);
-		final LongPairArrayList large = new LongPairArrayList(LARGE_SIZE);
-		final LongPairArrayList result = new LongPairArrayList(100);
+		final LongPairArrayList small = new LongPairArrayList(SMALL_SIZE,
+				SortingAlgorithm.MSD);
+		final LongPairArrayList large = new LongPairArrayList(LARGE_SIZE,
+				SortingAlgorithm.MSD);
+		final LongPairArrayList result = new LongPairArrayList(100,
+				SortingAlgorithm.MSD);
 		final Random r = new Random();
 
 		for (int i = 0; i < SMALL_SIZE; i++) {

@@ -10,7 +10,7 @@ import fr.ujm.tse.lt2c.satin.inferray.rules.AbstractFastRule;
 
 /**
  * Same-as special Rule
- *
+ * 
  * Encompasses :
  * <ul>
  * <li>eq-rep-o</li>
@@ -18,12 +18,12 @@ import fr.ujm.tse.lt2c.satin.inferray.rules.AbstractFastRule;
  * <li>eq-rep-s</li>
  * <li>eq-sym</li>
  * </ul>
- *
+ * 
  * Since same-as will be added for s-o symetrically, eq-rep-o is implide by
  * eq-rep-s
- *
+ * 
  * @author Julien Subercaze
- *
+ * 
  *         Dec. 13
  */
 public class ClassSameAsRule extends AbstractFastRule {
@@ -75,7 +75,7 @@ public class ClassSameAsRule extends AbstractFastRule {
 			values[1] = list1.getQuick(++i);
 			if (values[0] < NodeDictionary.SPLIT_INDEX) {
 
-				// If [0] is a p - eq-rep-p - easiest one
+				// If [0] is a p - eq-rep-p - easiest one, copy full list
 				final LongPairArrayList list2 = usableTriples
 						.getbyPredicate((int) values[0]);
 				if (list2 == null) {
@@ -111,7 +111,7 @@ public class ClassSameAsRule extends AbstractFastRule {
 						continue;
 					}
 					// Ok here we need to instantiate the output triples
-					final LongPairArrayList output = new LongPairArrayList();
+					final LongPairArrayList output = new LongPairArrayList(list1.getSortingAlgorithm());
 					val = values[0];
 
 					for (int j = 0; j < listsize; j++) {

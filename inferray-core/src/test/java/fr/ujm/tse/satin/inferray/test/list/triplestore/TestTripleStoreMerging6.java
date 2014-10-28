@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 import fr.ujm.tse.lt2c.satin.inferray.reasoner.Inferray;
@@ -20,11 +21,11 @@ public class TestTripleStoreMerging6 {
 		final long[] expectedNew = { 5, 1, 6, 5, 6, 8, 9, 7 };
 		final long[] expectedmain = { 2, 1, 3, 5, 4, 7, 5, 1, 6, 5, 6, 8, 9, 7, 10, 8 };
 
-		final CacheTripleStore main = new SortedCacheObliviousTripleStore(50);
-		final CacheTripleStore output = new SortedCacheObliviousTripleStore(50);
-		final CacheTripleStore newtriples = new SortedCacheObliviousTripleStore(50);
-		main.setPropertyTriples(p, new LongPairArrayList(mainTriples));
-		output.setPropertyTriples(p, new LongPairArrayList(outputTriples));
+		final CacheTripleStore main = new SortedCacheObliviousTripleStore(50,SortingAlgorithm.MSD);
+		final CacheTripleStore output = new SortedCacheObliviousTripleStore(50,SortingAlgorithm.MSD);
+		final CacheTripleStore newtriples = new SortedCacheObliviousTripleStore(50,SortingAlgorithm.MSD);
+		main.setPropertyTriples(p, new LongPairArrayList(mainTriples,SortingAlgorithm.MSD));
+		output.setPropertyTriples(p, new LongPairArrayList(outputTriples,SortingAlgorithm.MSD));
 		final Inferray infer = new Inferray();
 		infer.setMainTripleStore(main);
 		infer.setOutputTriples(output);

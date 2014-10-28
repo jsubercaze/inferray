@@ -1,5 +1,6 @@
 package fr.ujm.tse.lt2c.satin.inferray.reasoner;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,7 +17,7 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import fr.ujm.tse.lt2c.satin.inferray.configuration.DefaultConfiguration;
-import fr.ujm.tse.lt2c.satin.inferray.configuration.MyConfiguration;
+import fr.ujm.tse.lt2c.satin.inferray.configuration.InferrayConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.transitive.FastTransitiveClosure;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.AbstractDictionary;
@@ -36,7 +37,7 @@ import fr.ujm.tse.lt2c.satin.inferray.triplestore.SortedCacheObliviousTripleStor
  * Reasoner :
  * <ul>
  * <li>Very fast reasoning using cache friendly memory patterns</li>
- * <li>Can be easily integrated with Jena</li>
+ * <li>Integration with Jena</li>
  * </ul>
  * 
  * The principle of <code>Inferray</code> is the following. At each sequence of
@@ -48,12 +49,20 @@ import fr.ujm.tse.lt2c.satin.inferray.triplestore.SortedCacheObliviousTripleStor
  *                       |
  *                      \/
  * mainTripleStore---->[Inference]----> outPutTriples
+ * 
+ * newTriples <-------- outputTriples \ mainTripleStore
+ * mainTripleStore <--- newTriples U mainTripleStore
  * </pre>
+ * 
+ * Then
+ * 
+ * 
  * 
  * See {@link #process()} for more details.
  * <p>
- * In a second step :
+ * 
  * <ol>
+ * <li>All rules are fired</li>
  * <li>newTriples is cleared, while memory allocation is maintained to avoid
  * reallocation</li>
  * <li>outputTriples and mainTripleStore are merged into mainTripleStore. see
@@ -119,7 +128,7 @@ public class Inferray {
 	/**
 	 * Global configuration
 	 */
-	protected MyConfiguration config;
+	protected InferrayConfiguration config;
 	/**
 	 * Number of iteration performed
 	 */
@@ -164,23 +173,27 @@ public class Inferray {
 	/**
 	 * Minimal constructor.
 	 */
-	public Inferray(final MyConfiguration configuration) {
+	public Inferray(final InferrayConfiguration configuration) {
 		parser = null;
 		config = configuration;
 		mainTripleStore = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		this.dictionary = new NodeDictionary(mainTripleStore);
 		newTriples = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		outputTriples = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		rulesprofile = RulesProfileFactory.getProfileInstance(
 				config.getRulesProfile(), dictionary, mainTripleStore,
 				newTriples, outputTriples, config);
 		rules = rulesprofile.getRules();
 		if (configuration.exportSupport()) {
 			exportTriples = new SortedCacheObliviousTripleStore(
-					config.getMinimalPropertyNumber());
+					config.getMinimalPropertyNumber(),
+					this.config.getSortingAlgorithm());
 		}
 	}
 
@@ -188,17 +201,20 @@ public class Inferray {
 	 * Minimal constructor.
 	 */
 	public Inferray(final NodeDictionary dictionary,
-			final MyConfiguration configuration) {
+			final InferrayConfiguration configuration) {
 		parser = null;
 		this.dictionary = dictionary;
 
 		config = configuration;
 		mainTripleStore = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		newTriples = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		outputTriples = new SortedCacheObliviousTripleStore(
-				config.getMinimalPropertyNumber());
+				config.getMinimalPropertyNumber(),
+				this.config.getSortingAlgorithm());
 		rulesprofile = RulesProfileFactory.getProfileInstance(
 				config.getRulesProfile(), dictionary, mainTripleStore,
 				newTriples, outputTriples, config);
@@ -220,6 +236,12 @@ public class Inferray {
 	 *            location of the file
 	 */
 	public void parse(final String ontology) {
+		final File f = new File(ontology);
+
+		if (!f.exists()) {
+			throw new RuntimeException("File " + f.getAbsolutePath()
+					+ " not found");
+		}
 		if (parser == null) {
 			parser = new FullFileRIOTParser(mainTripleStore, dictionary,
 					rulesprofile);
@@ -252,22 +274,25 @@ public class Inferray {
 		}
 		// If fast transitity, check if equivalent class must still be run
 		// (otherwise will be done in 2nd round)
-		if (newTriples.isEmpty() && rulesprofile.hasSCMEQPSCMEQC()) {
-			for (int i = 0; i < rules.length; i++) {
-				final AbstractFastRule rule = rules[i];
-				if (config.isFastClosure()) {
-					if ((rulesprofile.hasSubClassClosure() && fastSubClassSuccess)
-							|| (rulesprofile.hasSubPropertyClosure() && fastSubPropertySuccess)) {
-						if (rule instanceof FCB_SCM_SCO_EQC2
-								|| rule instanceof FCB_SCM_SPO_EQP2) {
-							rule.fire();
-						}
-					}
-				}
-			}
-			// Merge
-			updateTripleStores();
-		}
+		// if (newTriples.isEmpty() && rulesprofile.hasSCMEQPSCMEQC()) {
+		// for (int i = 0; i < rules.length; i++) {
+		// final AbstractFastRule rule = rules[i];
+		// if (config.isFastClosure()) {
+		// if ((rulesprofile.hasSubClassClosure() && fastSubClassSuccess)
+		// || (rulesprofile.hasSubPropertyClosure() && fastSubPropertySuccess))
+		// {
+		// if (rule instanceof FCB_SCM_SCO_EQC2
+		// || rule instanceof FCB_SCM_SPO_EQP2) {
+		// rule.fire();
+		// }
+		// }
+		// }
+		// }
+		// // Merge
+		// updateTripleStores();
+		// } else {
+		// System.out.println("non");
+		// }
 
 		// Fail fast
 		if (newTriples.isEmpty()) {
@@ -342,18 +367,25 @@ public class Inferray {
 		}
 
 		if (config.isFastClosure()) {
+			logger.info("Configurated for fast closure");
 			if (rulesprofile.hasSubClassClosure()) {
+				logger.info("Fast closure is activated in the profile");
+				if (logger.isDebugEnabled()) {
+					logger.debug(mainTripleStore
+							.getbyPredicate((int) AbstractDictionary.rdfssubClassOf) == null);
+				}
 				if (mainTripleStore
 						.getbyPredicate((int) AbstractDictionary.rdfssubClassOf) != null
 						&& mainTripleStore.getbyPredicate(
 								(int) AbstractDictionary.rdfssubClassOf).size() < CLOSURE_LIMIT) {
 					try {
+						logger.info("Fast closure starting");
 						@SuppressWarnings("static-access")
 						final FastTransitiveClosure fc = new FastTransitiveClosure(
 								mainTripleStore,
 								(int) dictionary.rdfssubClassOf,
 								config.exportSupport(), exportTriples);
-						fc.computeTransitiveClosure();
+						fc.computeTransitiveClosure(this.config.getSortingAlgorithm());
 						fastSubClassSuccess = true;
 					} catch (final Exception e) {
 						logger.error("Exception in closure ", e);
@@ -375,7 +407,7 @@ public class Inferray {
 								mainTripleStore,
 								(int) dictionary.rdfssubPropertyOf,
 								config.exportSupport(), exportTriples);
-						fc.computeTransitiveClosure();
+						fc.computeTransitiveClosure(this.config.getSortingAlgorithm());
 						fastSubPropertySuccess = true;
 					} catch (final Exception e) {
 						logger.error("Exception in closure ", e);
@@ -698,7 +730,7 @@ public class Inferray {
 	 * @return number of triples inferred
 	 */
 	public long getInferredTriples() {
-		return totalTriples - initialTriples;
+		return Math.max(totalTriples - initialTriples, 0);
 	}
 
 	/**

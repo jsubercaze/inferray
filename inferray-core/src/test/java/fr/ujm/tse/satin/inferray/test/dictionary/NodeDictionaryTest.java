@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 import fr.ujm.tse.lt2c.satin.inferray.triplestore.SortedCacheObliviousTripleStore;
@@ -19,7 +20,7 @@ public class NodeDictionaryTest {
 
 	@Before
 	public void init() {
-		final CacheTripleStore ts = new SortedCacheObliviousTripleStore(50);
+		final CacheTripleStore ts = new SortedCacheObliviousTripleStore(50,SortingAlgorithm.MSD);
 		dictionary = new NodeDictionary(ts);
 		dictionary.add("http://test.com/resource");
 		dictionary.addProperty("http://test.com/property");

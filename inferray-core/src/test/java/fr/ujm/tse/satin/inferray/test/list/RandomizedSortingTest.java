@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 
 public class RandomizedSortingTest {
@@ -18,8 +19,8 @@ public class RandomizedSortingTest {
 	@Test
 	public void testCountSortFromTo() {
 		for (int j = 0; j < TESTS; j++) {
-			final LongPairArrayList l1 = new LongPairArrayList(TOTAL_SIZE);
-			final LongPairArrayList l2 = new LongPairArrayList(TOTAL_SIZE);
+			final LongPairArrayList l1 = new LongPairArrayList(TOTAL_SIZE,SortingAlgorithm.MSD);
+			final LongPairArrayList l2 = new LongPairArrayList(TOTAL_SIZE,SortingAlgorithm.MSD);
 			final Random r = new Random();
 			for (int i = 0; i < TOTAL_SIZE; i++) {
 				final int s = r.nextInt(MAX_VALUE);

@@ -98,6 +98,18 @@ public abstract class AbstractJenaParser implements Parser {
 	 * @return s,p,o
 	 */
 	public long[] encodeTriple(final Triple triple) {
+		//if(triple.getPredicate().getURI().startsWith("http://www.w3.org/2000/01/")){
+		//		System.out.println(triple);
+		//		System.out.println(triple.getPredicate().getURI());
+		//		try {
+		//			System.in.read();
+		//		} catch (final IOException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+		//}
+
+
 		// Add the triple into the triple
 		final int hasProp = hasPropertyInObjectOrSubject(triple);
 		long s = -1, o = -1;

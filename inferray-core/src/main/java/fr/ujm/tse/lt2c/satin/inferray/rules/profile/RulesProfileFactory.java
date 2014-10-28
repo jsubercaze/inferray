@@ -1,6 +1,6 @@
 package fr.ujm.tse.lt2c.satin.inferray.rules.profile;
 
-import fr.ujm.tse.lt2c.satin.inferray.configuration.MyConfiguration;
+import fr.ujm.tse.lt2c.satin.inferray.configuration.InferrayConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 
@@ -29,7 +29,7 @@ public class RulesProfileFactory {
 			final SupportedProfile profile, final NodeDictionary dictionary,
 			final CacheTripleStore mainTripleStore,
 			final CacheTripleStore usableTriples,
-			final CacheTripleStore outputTriples,final MyConfiguration config) {
+			final CacheTripleStore outputTriples,final InferrayConfiguration config) {
 		RulesProfile ruleprofile = null;
 		switch (profile) {
 		case RHODF:

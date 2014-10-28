@@ -1,12 +1,13 @@
 package fr.ujm.tse.lt2c.satin.inferray.configuration;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.rules.profile.SupportedProfile;
 
 /**
  * Utility to build configurations usind builder pattern
- *
+ * 
  * @author Julien
- *
+ * 
  *         Feb 14
  */
 public class ConfigurationBuilder {
@@ -75,6 +76,13 @@ public class ConfigurationBuilder {
 	public ConfigurationBuilder setFastClosure(final boolean bool) {
 		checkNotBuilt();
 		configurationBean.setFastClosure(bool);
+		return this;
+	}
+
+	public ConfigurationBuilder setSortingAlgorithm(
+			final SortingAlgorithm algorithm) {
+		checkNotBuilt();
+		configurationBean.setSortingAlgorithm(algorithm);
 		return this;
 	}
 

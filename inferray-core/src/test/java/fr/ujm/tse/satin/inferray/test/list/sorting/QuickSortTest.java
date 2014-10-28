@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 
 
@@ -16,7 +17,7 @@ public class QuickSortTest {
 
 	@Test
 	public void test() {
-		final LongPairArrayList l = new LongPairArrayList(arrayToSort);
+		final LongPairArrayList l = new LongPairArrayList(arrayToSort,SortingAlgorithm.MSD);
 		l.quickSortFullNoDuplicates(false);
 		assertArrayEquals(arraySorted, l.elements());
 	}

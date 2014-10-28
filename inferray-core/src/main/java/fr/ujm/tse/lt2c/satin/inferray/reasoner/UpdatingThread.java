@@ -8,9 +8,9 @@ import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 
 /**
  * Thread handling the update of a given property between various triple stores
- *
+ * 
  * @author Julien
- *
+ * 
  */
 public class UpdatingThread implements Runnable {
 
@@ -48,7 +48,7 @@ public class UpdatingThread implements Runnable {
 	/**
 	 * Faster way to update the triple stores - With one counting sort and one
 	 * insertion//duplicate parallel
-	 *
+	 * 
 	 * @param property
 	 * @param mainTriples
 	 * @param newTriples
@@ -79,7 +79,7 @@ public class UpdatingThread implements Runnable {
 
 	/**
 	 * Update the triple stores for the property i
-	 *
+	 * 
 	 * @param i
 	 */
 	private void updateOnProperty(final int i) {
@@ -114,6 +114,9 @@ public class UpdatingThread implements Runnable {
 					+ _inferred);
 		}
 		// Get the property in newTriples to add the duplicates
+		/**
+		 * No existing property table in the main triple store
+		 */
 		if (_main == null) {
 			// Sort and add
 			if (logger.isTraceEnabled()) {
@@ -137,18 +140,20 @@ public class UpdatingThread implements Runnable {
 			}
 		} else {
 			/**
-			 *
+			 * 
 			 * <pre>
 			 * 1) Duplicates are removed from _output which is sorted
 			 * 2) Main TS is also sorted
 			 * 2) Allocate a new LongPairArrayList for the main ts
 			 * 3) Traverse both array in // for insertion and duplicate removal
-			 *
+			 * 
 			 * </pre>
 			 */
-			final LongPairArrayList futureMain = new LongPairArrayList();
+			final LongPairArrayList futureMain = new LongPairArrayList(
+					this.mainTripleStore.getSortingAlgorithm());
 			final LongPairArrayList newTriplesList = new LongPairArrayList(
-					_inferred.size() / 5);
+					_inferred.size() / 5,
+					this.mainTripleStore.getSortingAlgorithm());
 			// Traverse the arrays
 			int indexInferred = -1;
 			int indexMain = -1;

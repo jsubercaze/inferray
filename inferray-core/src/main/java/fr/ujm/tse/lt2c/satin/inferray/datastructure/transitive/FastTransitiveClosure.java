@@ -11,13 +11,14 @@ import stixar.graph.gen.BasicDGFactory;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 
 /**
- * Compute fast transitive closure using the Stixar implementation of Nuutila's
- * algorithm. Performance ensues.
+ * Compute fast transitive closure using an adapted version of the Stixar
+ * implementation of Nuutila's algorithm. Performance ensues.
  * 
  * @author Julien
  * 
@@ -82,7 +83,7 @@ public class FastTransitiveClosure {
 		}
 	}
 
-	public void computeTransitiveClosure() {
+	public void computeTransitiveClosure(final SortingAlgorithm algorithm) {
 		if (longToInt == null) {
 			return;
 		}
@@ -94,7 +95,7 @@ public class FastTransitiveClosure {
 		LongPairArrayList exportTriples = null;
 		// In case of export
 		if (export) {
-			exportTriples = new LongPairArrayList(triples.size() * 2);
+			exportTriples = new LongPairArrayList(triples.size() * 2, algorithm);
 			exportTS.setPropertyTriples(NodeDictionary.SPLIT_INDEX
 					- propertyIndex, exportTriples);
 		}
@@ -113,6 +114,7 @@ public class FastTransitiveClosure {
 
 		final BasicDigraph dg = factory.digraph();
 		final NodeMatrix<Boolean> matrix = Transitivity.compactClosure(dg);
+		int newT = 0;
 		for (int i = 0; i < counter; i++) {
 			for (int j = i + 1; j < counter; j++) {
 				if (matrix.get(nodes[i], nodes[j])) {
@@ -122,11 +124,12 @@ public class FastTransitiveClosure {
 				}
 			}
 		}
+
 		// Break on through to the other side
 		for (int i = 0; i < counter; i++) {
 			for (int j = i + 1; j < counter; j++) {
 				if (matrix.get(nodes[j], nodes[i])) {
-
+					newT++;
 					triples.add(nodes[j].getLong(attributes));
 					triples.add(nodes[i].getLong(attributes));
 					if (export) {
@@ -136,6 +139,7 @@ public class FastTransitiveClosure {
 				}
 			}
 		}
+		LOGGER.info("New triples " + newT);
 	}
 
 	/**

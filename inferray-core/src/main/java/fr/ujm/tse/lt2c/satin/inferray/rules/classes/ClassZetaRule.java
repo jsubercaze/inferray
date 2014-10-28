@@ -81,7 +81,7 @@ public class ClassZetaRule extends AbstractFastRule {
 		long currentSubject = -1;
 		int i = -1;
 		final boolean useSubject = (objectInferred == -1);
-		final LongPairArrayList output = new LongPairArrayList();
+		final LongPairArrayList output = new LongPairArrayList(list1.getSortingAlgorithm());
 		while (currentObject < objectTerminological && i < (list1.size() - 2)) {
 			currentSubject = list1.getQuick(++i);
 			currentObject = list1.getQuick(++i);

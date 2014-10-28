@@ -110,7 +110,7 @@ public class ClassEpsilonRule extends AbstractFastRule {
 		// Infer - size known in advance
 		if (invert) {
 			final LongPairArrayList _output = new LongPairArrayList(
-					listUsable.size());
+					listUsable.size(),listUsable.getSortingAlgorithm());
 			for (int j = -1; j < listUsable.size() - 1;) {
 				final long tmp = listUsable.getQuick(++j);
 				_output.add(listUsable.getQuick(++j));

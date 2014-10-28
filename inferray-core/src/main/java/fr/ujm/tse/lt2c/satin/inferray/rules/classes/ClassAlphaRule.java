@@ -53,7 +53,7 @@ public class ClassAlphaRule extends AbstractFastRule {
 	 * <pre>
 	 *  _________________
 	 * |s1,p1,o1,s2,p2,o2|
-	 * ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 *  0  1  2  3  4  5
 	 * </pre>
 	 */
@@ -147,7 +147,7 @@ public class ClassAlphaRule extends AbstractFastRule {
 			logger.trace(ts2);
 		}
 		// Will contain the inferred triples
-		final LongPairArrayList output = new LongPairArrayList();
+		final LongPairArrayList output = new LongPairArrayList(list1.getSortingAlgorithm());
 
 		// Counter will keep the index in the second list, avoiding to restart
 		// useless loops

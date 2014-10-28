@@ -2,6 +2,7 @@ package fr.ujm.tse.lt2c.satin.inferray.interfaces;
 
 import java.util.Iterator;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
 import fr.ujm.tse.lt2c.satin.inferray.dictionary.NodeDictionary;
 
@@ -201,5 +202,10 @@ public interface CacheTripleStore {
 	 *         nor empty
 	 */
 	public Iterator<LongPairArrayList> verticalIterator();
+	/**
+	 * 
+	 * @return the algorithm used to sort the property tables
+	 */
+	public SortingAlgorithm getSortingAlgorithm();
 
 }

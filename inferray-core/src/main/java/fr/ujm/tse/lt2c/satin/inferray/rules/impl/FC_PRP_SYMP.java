@@ -69,7 +69,7 @@ public class FC_PRP_SYMP extends AbstractFastRule {
 					continue;
 				}
 				final LongPairArrayList _output = new LongPairArrayList(
-						list2.size());
+						list2.size(),list1.getSortingAlgorithm());
 				// get the triples from the second list - reverse
 				for (int j = -1; j < list2.size() - 1;) {
 					final long tmp = list2.getQuick(++j);

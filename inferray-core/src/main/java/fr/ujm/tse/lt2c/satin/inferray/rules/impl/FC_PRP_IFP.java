@@ -181,7 +181,7 @@ public class FC_PRP_IFP extends AbstractFastRule {
 			//listNew = listNew.copy();
 			listNew = listNew.objectSortedCopy();
 			// Lazy instantiation takes finally place
-			final LongPairArrayList output = new LongPairArrayList();
+			final LongPairArrayList output = new LongPairArrayList(listMain.getSortingAlgorithm());
 			// Do the usual traversal
 			traverse(listMain, listNew, output, p);
 
