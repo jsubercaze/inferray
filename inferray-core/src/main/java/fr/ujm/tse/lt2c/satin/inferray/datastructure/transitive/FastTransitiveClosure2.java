@@ -23,7 +23,8 @@ import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
  * @author Julien
  * 
  */
-public class FastTransitiveClosure {
+public class FastTransitiveClosure2 {
+
 
 	/**
 	 * Logger
@@ -66,7 +67,7 @@ public class FastTransitiveClosure {
 	 */
 	private final CacheTripleStore exportTS;
 
-	public FastTransitiveClosure(final CacheTripleStore ts,
+	public FastTransitiveClosure2(final CacheTripleStore ts,
 			final int propertyIndex, final boolean export,
 			final CacheTripleStore exportTS) {
 		this.ts = ts;
@@ -77,7 +78,8 @@ public class FastTransitiveClosure {
 				&& !ts.getbyPredicate(propertyIndex).isEmpty()) {
 			longToInt = HashBiMap.create(ts.getbyPredicate(propertyIndex)
 					.size());
-			nodes = new BasicNode[ts.getbyPredicate(propertyIndex).size()];
+			final int taille = (ts.getbyPredicate(propertyIndex).size() / 1);
+			nodes = new BasicNode[taille];
 			attributes = new long[ts.getbyPredicate(propertyIndex).size()];
 			factory = new BasicDGFactory();
 		}
@@ -90,7 +92,7 @@ public class FastTransitiveClosure {
 
 		LOGGER.info("Computing closure for  " + this.propertyIndex);
 
-		// Get the list of
+		// Get the list of triples
 		final LongPairArrayList triples = ts.getbyPredicate(propertyIndex);
 		LongPairArrayList exportTriples = null;
 		// In case of export
@@ -113,6 +115,7 @@ public class FastTransitiveClosure {
 		}
 
 		final BasicDigraph dg = factory.digraph();
+
 		final NodeMatrix<Boolean> matrix = Transitivity.compactClosure(dg);
 		int newT = 0;
 		for (int i = 0; i < counter; i++) {

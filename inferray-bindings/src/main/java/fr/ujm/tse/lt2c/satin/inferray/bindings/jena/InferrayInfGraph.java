@@ -20,6 +20,7 @@ import com.hp.hpl.jena.reasoner.rulesys.FBRuleInfGraph;
 import com.hp.hpl.jena.reasoner.rulesys.Functor;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
+import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.configuration.ConfigurationBuilder;
 import fr.ujm.tse.lt2c.satin.inferray.configuration.PropertyConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.datastructure.LongPairArrayList;
@@ -105,6 +106,7 @@ public class InferrayInfGraph extends BaseInfGraph implements InfGraph {
 				.setForceQuickSort(false).setMultithread(true)
 				.setThreadpoolSize(8).setAxiomaticTriplesDirectory("/tmp/")
 				.setFastClosure(true).setExportTriples(true)
+				.setSortingAlgorithm(SortingAlgorithm.HYBRID_IMD)
 				.setRulesProfile(profile).setDumpFileOnExit(false).build();
 		inferray = new Inferray(config);
 		this.binder = new JenaBinder(inferray, inferray.getRulesprofile(), this);

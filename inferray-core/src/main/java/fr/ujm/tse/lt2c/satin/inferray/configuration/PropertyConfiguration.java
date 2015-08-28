@@ -45,7 +45,7 @@ public class PropertyConfiguration implements InferrayConfiguration {
 	 */
 	boolean exportTriples = false;
 
-	SortingAlgorithm algorithm;
+	SortingAlgorithm algorithm = SortingAlgorithm.HYBRID_IMD;
 
 	public PropertyConfiguration() {
 		super();

@@ -2,7 +2,6 @@ package fr.ujm.tse.lt2c.satin.inferray.benchmark;
 
 import java.io.IOException;
 
-import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
 import fr.ujm.tse.lt2c.satin.inferray.configuration.ConfigurationBuilder;
 import fr.ujm.tse.lt2c.satin.inferray.configuration.PropertyConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.reasoner.Inferray;
@@ -18,7 +17,7 @@ public class InferraySpeed {
 	/**
 	 * Number of iterations to perform
 	 */
-	public static final int ITERATIONS = 10;
+	public static final int ITERATIONS = 1;
 
 	public static void main(final String[] args) throws IOException {
 		//System.in.read();
@@ -30,7 +29,6 @@ public class InferraySpeed {
 					.setExportTriples(false).setMultithread(true)
 					.setThreadpoolSize(8).setAxiomaticTriplesDirectory("/tmp/")
 					.setFastClosure(true)
-					.setSortingAlgorithm(SortingAlgorithm.COUNTING)
 					.setRulesProfile(SupportedProfile.RDFSPLUS)
 					.setDumpFileOnExit(false).build();
 			final Inferray inferray = new Inferray(config);

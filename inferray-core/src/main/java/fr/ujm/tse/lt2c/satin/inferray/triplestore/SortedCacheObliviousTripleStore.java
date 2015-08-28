@@ -165,7 +165,7 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 			}
 			for (int j = 0; j < property.size(); j += 2) {
 				// If sorted could optimize here
-				// TODO it is now really necessary ?
+				// it is now really necessary ?
 				if (property.getQuick(j) == o) {
 					triplesByObject.add(property.getQuick(j));// S
 					triplesByObject.add(i);// P
@@ -184,7 +184,7 @@ public final class SortedCacheObliviousTripleStore implements CacheTripleStore {
 	@Override
 	public final void writeToFile(final String file,
 			final NodeDictionary dictionary) {
-		// TODO Auto-generated method stub
+
 
 	}
 

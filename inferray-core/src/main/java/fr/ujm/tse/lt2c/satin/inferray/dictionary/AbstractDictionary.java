@@ -173,15 +173,15 @@ public abstract class AbstractDictionary implements Dictionary {
 	 */
 	public static long rdfsdomain = 0;
 	/**
-	 * owl:hasValue
+	 * rdfs:range
 	 */
 	public static long rdfsrange = 0;
 	/**
-	 * owl:hasValue
+	 * rdfs:subClassOf
 	 */
 	public static long rdfssubClassOf = 0;
 	/**
-	 * owl:hasValue
+	 * rdfs:subPropertyOf
 	 */
 	public static long rdfssubPropertyOf = 0;
 

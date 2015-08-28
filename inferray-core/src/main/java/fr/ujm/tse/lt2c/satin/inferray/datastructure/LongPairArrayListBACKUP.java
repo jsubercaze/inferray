@@ -8,9 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.log4j.Logger;
 
 import cern.colt.list.LongArrayList;
-import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.os.InsertionSortPairsOS;
-import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingAlgorithm;
-import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingUtils;
 
 /**
  * <p>
@@ -24,17 +21,23 @@ import fr.ujm.tse.lt2c.satin.inferray.algorithms.sort.utils.SortingUtils;
  * the sorting algorithms for the triple structure. Both countingsort and
  * quicksoet have been adapted to match these requirements. A insertion sort has
  * been added to the class. All three algorithms are wrapped by
- * {@link #subjectSort()} and {@link #objectSort()}.
+ * {@link #subjectSort()} and {@link #objectSort()}. Conditions :
+ * <ol>
+ * <li>Less than 20 elements (10 pairs) : Insertion Sort</li>
+ * <li>Range by values greater than 10 : Quicksort</li>
+ * <li>Otherwise : Hybrid Counting sort</li>
+ * </ol>
  * </p>
- *
+ * 
  * <p>
- * Performance tuning should be done here in priority.
+ * Performance tuning should be done here in priority. Tuning the rest is almost
+ * meaningless
  * </p>
- *
+ * 
  * @author Julien Subercaze
- *
+ * 
  */
-public class LongPairArrayList extends LongArrayList {
+public class LongPairArrayListBACKUP extends LongArrayList {
 	/**
 	 * Sorts by counting
 	 */
@@ -64,22 +67,17 @@ public class LongPairArrayList extends LongArrayList {
 	 * Logger
 	 */
 	private static final Logger LOGGER = Logger
-			.getLogger(LongPairArrayList.class);
+			.getLogger(LongPairArrayListBACKUP.class);
 	/**
 	 * Insertion sort condition.
 	 */
 	private static final int CUTOFF = 20;
 
 	/**
-	 * Algorithm to sort the data
-	 */
-	private final SortingAlgorithm algorithm;
-
-	/**
 	 * Store a sorted copy that is sorted by object in cache. Cleared by call to
 	 * {@link #totalSortingNoDuplicate(boolean, boolean)}.
 	 */
-	private SoftReference<LongPairArrayList> softObjectSortedCopy;
+	private SoftReference<LongPairArrayListBACKUP> softObjectSortedCopy;
 
 	/**
 	 * Update this value only on a O(1) basis, i.e. after sorting
@@ -98,31 +96,28 @@ public class LongPairArrayList extends LongArrayList {
 	/**
 	 * Empty constructor
 	 */
-	public LongPairArrayList(final SortingAlgorithm algorithm) {
+	public LongPairArrayListBACKUP() {
 		super();
-		this.algorithm = algorithm;
+
 	}
 
 	/**
 	 * With preallocated array
-	 *
+	 * 
 	 * @param i
 	 *            number of elements
 	 */
-	public LongPairArrayList(final int i, final SortingAlgorithm algorithm) {
+	public LongPairArrayListBACKUP(final int i) {
 		super(i);
-		this.algorithm = algorithm;
 	}
 
 	/**
 	 * Calls constructor from {@link LongArrayList}
-	 *
+	 * 
 	 * @param elements
 	 */
-	public LongPairArrayList(final long[] elements,
-			final SortingAlgorithm algorithm) {
+	public LongPairArrayListBACKUP(final long[] elements) {
 		super(elements);
-		this.algorithm = algorithm;
 	}
 
 	/**
@@ -130,17 +125,17 @@ public class LongPairArrayList extends LongArrayList {
 	 * been internally cached using {@link SoftReference}. This cached value is
 	 * cleared at each iteration of inferring through
 	 * {@link #totalSortingNoDuplicate(boolean, boolean)}.
-	 *
+	 * 
 	 * @return an object sorted copy of the current list
 	 */
-	public LongPairArrayList objectSortedCopy() {
-		LongPairArrayList objectSortedCopy = null;
+	public LongPairArrayListBACKUP objectSortedCopy() {
+		LongPairArrayListBACKUP objectSortedCopy = null;
 		if (softObjectSortedCopy == null || softObjectSortedCopy.get() == null) {
 			objectCacheMiss.incrementAndGet();
 			objectSortedCopy = this.copy();
 			objectSortedCopy.objectSort();
 			// Update the soft reference
-			softObjectSortedCopy = new SoftReference<LongPairArrayList>(
+			softObjectSortedCopy = new SoftReference<LongPairArrayListBACKUP>(
 					objectSortedCopy);
 		} else {
 			objectCacheHit.incrementAndGet();
@@ -167,7 +162,7 @@ public class LongPairArrayList extends LongArrayList {
 	 * array have the object, leading to an insertion of same triples that
 	 * previously, only with a different object.
 	 * </p>
-	 *
+	 * 
 	 * @param o
 	 *            subject
 	 * @param size
@@ -191,7 +186,7 @@ public class LongPairArrayList extends LongArrayList {
 	 * array have the subject, leading to an insertion of same triples that
 	 * previously, only with a different subject.
 	 * </p>
-	 *
+	 * 
 	 * @param s
 	 *            subject
 	 * @param size
@@ -210,7 +205,7 @@ public class LongPairArrayList extends LongArrayList {
 	 * Add the previous insertion and replace the subject with the new subject.
 	 * Checks if there is an equality with the previous inferred one. Useful to
 	 * generate <code>owl:equivalent*</code>
-	 *
+	 * 
 	 * @param s
 	 *            the subject
 	 * @param size
@@ -239,7 +234,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Sort by object first, using counting sort
-	 *
+	 * 
 	 * @param from
 	 *            start index
 	 * @param to
@@ -344,17 +339,9 @@ public class LongPairArrayList extends LongArrayList {
 		if (size() - 1 == 0) {
 			return;
 		}
-		SortingUtils.sortOS(this, algorithm);
-	}
-
-	@SuppressWarnings("unused")
-	private void oldobjectsort() {
-		if (size() - 1 == 0) {
-			return;
-		}
 		if (this.size < CUTOFF) {
 			counting.incrementAndGet();
-			InsertionSortPairsOS.pairInsertionObjectSort(elements, size);
+			this.pairInsertionObjectSort();
 			return;
 		}
 		objectsortFromTo(1, size() - 1);
@@ -362,7 +349,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Sort the pairs in the list along to their objects. Count Sort Algorithm
-	 *
+	 * 
 	 * @param from
 	 * @param to
 	 */
@@ -397,7 +384,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Partition for the quicksort, using a s,o comparator
-	 *
+	 * 
 	 * @param p
 	 * @param start
 	 * @param end
@@ -439,7 +426,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Partition for the quicksort, using a o,s comparator
-	 *
+	 * 
 	 * @param p
 	 * @param start
 	 * @param end
@@ -480,8 +467,8 @@ public class LongPairArrayList extends LongArrayList {
 	/**
 	 * To be used with the QS implementation that was developed for subject
 	 * sorting.
-	 *
-	 *
+	 * 
+	 * 
 	 * @param aindex
 	 * @param value
 	 * @param next
@@ -523,19 +510,19 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Sort and remove duplicates along to s,o order using Quicksort algorithm
-	 *
+	 * 
 	 * Usually slower than the Counting Sort alternatives. Should be use with
 	 * care only when memory size is a concern.
-	 *
+	 * 
 	 * @param duplicates
 	 * @return
 	 */
-	public LongPairArrayList quickSortFullNoDuplicates(final boolean duplicates) {
+	public LongPairArrayListBACKUP quickSortFullNoDuplicates(final boolean duplicates) {
 		// Shuffle elements to guard from worst case
 		shuffleFull();
-		LongPairArrayList result = null;
+		LongPairArrayListBACKUP result = null;
 		if (duplicates) {
-			result = new LongPairArrayList(this.size / 10, this.algorithm);
+			result = new LongPairArrayListBACKUP(this.size / 10);
 		}
 		recursiveQsort(0, this.size);
 		// Remove the duplicates in place
@@ -569,7 +556,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Recursive quicksort for subject sorting
-	 *
+	 * 
 	 * @param start
 	 *            start index
 	 * @param end
@@ -674,7 +661,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Counting Sort by subject first
-	 *
+	 * 
 	 * @param from
 	 *            start index
 	 * @param to
@@ -782,7 +769,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Swap two values at the given indices
-	 *
+	 * 
 	 * @param posa
 	 * @param posb
 	 */
@@ -810,34 +797,21 @@ public class LongPairArrayList extends LongArrayList {
 	 * Experiments shows that this method is as efficient as its counterpart
 	 * with duplicate regardless of the trim parameter value.
 	 * </p>
-	 *
+	 * 
 	 */
 	public void totalSortingNoDuplicate() {
-		if (softObjectSortedCopy != null) {
-			softObjectSortedCopy.clear();
-			softObjectSortedCopy = null;
-			this.maxObject = -1;
-		}
-		this.size = SortingUtils.sortSO(this, algorithm);
-	}
-
-	@SuppressWarnings("unused")
-	private void oldTotalSorting() {
 		// Since this method is called during update of the value, clear the
 		// softreference to the object sorted copy
 		if (softObjectSortedCopy != null) {
 			softObjectSortedCopy.clear();
 			softObjectSortedCopy = null;
-			this.maxObject = -1;
 		}
 		if (size > 2) {
 			if (this.size < CUTOFF) { // Go for insertion sort
 				insertions.incrementAndGet();
 				this.pairInsertionSortNoDuplicate();
 			} else { // Hybrid counting sort
-				hybridSort();
-				// this.size = CountingSortLongPair.sort(elements, size);
-				// this.size = MSDLongPairsOptimAdaptative.sort(elements);
+				totalSortingNoDuplicateNoCache();
 			}
 		}
 		// Update maxsubject
@@ -845,7 +819,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	}
 
-	private LongPairArrayList hybridSort() {
+	public LongPairArrayListBACKUP totalSortingNoDuplicateNoCache() {
 
 		// Counting sort
 		final int from = 0;
@@ -939,7 +913,7 @@ public class LongPairArrayList extends LongArrayList {
 		// if (logger.isDebugEnabled())
 		// logger.debug("Adjacents " + Arrays.toString(adjacents));
 		// //
-		final LongPairArrayList duplicates = null;
+		final LongPairArrayListBACKUP duplicates = null;
 
 		// Reconstruct the array without duplicates
 		int j = 0;
@@ -955,6 +929,7 @@ public class LongPairArrayList extends LongArrayList {
 				// logger.debug("Adjacent " + adjacent + " Subject " + subject);
 				// logger.debug("LAdjacent " + lastAdjacent + " LSubject "
 				// // + lastSubject);
+
 				if (k == 0 || adjacent != lastAdjacent) {
 					elements[j++] = subject;
 					elements[j++] = adjacent;
@@ -976,9 +951,8 @@ public class LongPairArrayList extends LongArrayList {
 	}
 
 	@Override
-	public LongPairArrayList copy() {
-		final LongPairArrayList copy = new LongPairArrayList(elements.clone(),
-				this.algorithm);
+	public LongPairArrayListBACKUP copy() {
+		final LongPairArrayListBACKUP copy = new LongPairArrayListBACKUP(elements.clone());
 		copy.setSizeRaw(size);
 		copy.maxObject = this.maxObject;
 		copy.maxSubject = this.maxSubject;
@@ -995,13 +969,9 @@ public class LongPairArrayList extends LongArrayList {
 		recursiveQsortObject(0, this.size);
 	}
 
-	public SortingAlgorithm getSortingAlgorithm() {
-		return algorithm;
-	}
-
 	/**
 	 * Sort from from inclusive to to exclusive
-	 *
+	 * 
 	 * @param array
 	 * @param from
 	 * @param to
@@ -1035,7 +1005,7 @@ public class LongPairArrayList extends LongArrayList {
 
 	/**
 	 * Sort a subarray using counting sort
-	 *
+	 * 
 	 * @param from
 	 * @param to
 	 */
@@ -1065,9 +1035,9 @@ public class LongPairArrayList extends LongArrayList {
 	/**
 	 * Insertion sort for sorting small arrays, in-place, highly efficient for
 	 * small arrays
-	 *
+	 * 
 	 * Algo from Wikipedia ;)
-	 *
+	 * 
 	 * @param array
 	 *            array to sort
 	 * @param from
@@ -1140,7 +1110,7 @@ public class LongPairArrayList extends LongArrayList {
 	}
 
 	/**
-	 *
+	 * 
 	 * @return the maximal value of <code>subject</code> in this list
 	 */
 	public long getMaxSubject() {
@@ -1148,7 +1118,7 @@ public class LongPairArrayList extends LongArrayList {
 	}
 
 	/**
-	 *
+	 * 
 	 * @return the maximal value of <code>object</code> in this list
 	 */
 	public long getMaxObject() {

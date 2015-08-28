@@ -9,6 +9,8 @@ import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
 /**
  * Thread handling the update of a given property between various triple stores
  * 
+ * FIXME enhance the merging of list, possibly investigate a branchless version
+ * 
  * @author Julien
  * 
  */

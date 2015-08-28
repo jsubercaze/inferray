@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import stixar.graph.BasicDigraph;
 import stixar.graph.BasicNode;
-import stixar.graph.attr.NodeMatrix;
+import stixar.graph.attr.ByteNodeMatrix;
 import stixar.graph.conn.Transitivity;
 import stixar.graph.gen.BasicDGFactory;
 
@@ -23,13 +23,14 @@ import fr.ujm.tse.lt2c.satin.inferray.interfaces.CacheTripleStore;
  * @author Julien
  * 
  */
-public class FastTransitiveClosure {
+public class FastTransitiveClosureNotCompact {
+
 
 	/**
 	 * Logger
 	 */
 	private static final Logger LOGGER = Logger
-			.getLogger(FastTransitiveClosure.class);
+			.getLogger(FastTransitiveClosureNotCompact.class);
 
 	/**
 	 * Main triple store from Inferray
@@ -66,7 +67,7 @@ public class FastTransitiveClosure {
 	 */
 	private final CacheTripleStore exportTS;
 
-	public FastTransitiveClosure(final CacheTripleStore ts,
+	public FastTransitiveClosureNotCompact(final CacheTripleStore ts,
 			final int propertyIndex, final boolean export,
 			final CacheTripleStore exportTS) {
 		this.ts = ts;
@@ -77,7 +78,8 @@ public class FastTransitiveClosure {
 				&& !ts.getbyPredicate(propertyIndex).isEmpty()) {
 			longToInt = HashBiMap.create(ts.getbyPredicate(propertyIndex)
 					.size());
-			nodes = new BasicNode[ts.getbyPredicate(propertyIndex).size()];
+			final int taille = (ts.getbyPredicate(propertyIndex).size() / 1);
+			nodes = new BasicNode[taille];
 			attributes = new long[ts.getbyPredicate(propertyIndex).size()];
 			factory = new BasicDGFactory();
 		}
@@ -90,7 +92,7 @@ public class FastTransitiveClosure {
 
 		LOGGER.info("Computing closure for  " + this.propertyIndex);
 
-		// Get the list of
+		// Get the list of triples
 		final LongPairArrayList triples = ts.getbyPredicate(propertyIndex);
 		LongPairArrayList exportTriples = null;
 		// In case of export
@@ -113,11 +115,12 @@ public class FastTransitiveClosure {
 		}
 
 		final BasicDigraph dg = factory.digraph();
-		final NodeMatrix<Boolean> matrix = Transitivity.compactClosure(dg);
+
+		final ByteNodeMatrix matrix = Transitivity.acyclicClosure(dg);
 		int newT = 0;
 		for (int i = 0; i < counter; i++) {
 			for (int j = i + 1; j < counter; j++) {
-				if (matrix.get(nodes[i], nodes[j])) {
+				if (matrix.get(nodes[i], nodes[j])==1) {
 
 					triples.add(nodes[i].getLong(attributes));
 					triples.add(nodes[j].getLong(attributes));
@@ -128,7 +131,7 @@ public class FastTransitiveClosure {
 		// Break on through to the other side
 		for (int i = 0; i < counter; i++) {
 			for (int j = i + 1; j < counter; j++) {
-				if (matrix.get(nodes[j], nodes[i])) {
+				if (matrix.get(nodes[j], nodes[i])==1) {
 					newT++;
 					triples.add(nodes[j].getLong(attributes));
 					triples.add(nodes[i].getLong(attributes));

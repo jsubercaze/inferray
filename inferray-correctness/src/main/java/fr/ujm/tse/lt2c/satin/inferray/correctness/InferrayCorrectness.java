@@ -17,7 +17,6 @@ import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 import fr.ujm.tse.lt2c.satin.inferray.configuration.DefaultConfiguration;
-import fr.ujm.tse.lt2c.satin.inferray.configuration.MyConfiguration;
 import fr.ujm.tse.lt2c.satin.inferray.reasoner.Inferray;
 import fr.ujm.tse.lt2c.satin.inferray.rules.profile.SupportedProfile;
 import fr.ujm.tse.lt2c.satin.inferray.utils.ExportUtils;
@@ -60,7 +59,7 @@ public class InferrayCorrectness {
 	public static void checkInferrayCorrectnessRDFSAndDumpToFiles(
 			final String ontologyLocation) {
 		// Compute the model processed by Inferray
-		final MyConfiguration config = new DefaultConfiguration();
+		final DefaultConfiguration config = new DefaultConfiguration();
 		config.setRulesProfile(SupportedProfile.RDFS);
 		final Inferray infere = new Inferray(config);
 		infere.parse(ontologyLocation);

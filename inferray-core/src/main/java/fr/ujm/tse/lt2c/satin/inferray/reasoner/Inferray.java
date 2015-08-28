@@ -385,14 +385,21 @@ public class Inferray {
 								mainTripleStore,
 								(int) dictionary.rdfssubClassOf,
 								config.exportSupport(), exportTriples);
-						fc.computeTransitiveClosure(this.config.getSortingAlgorithm());
+						fc.computeTransitiveClosure(this.config
+								.getSortingAlgorithm());
 						fastSubClassSuccess = true;
 					} catch (final Exception e) {
+						e.printStackTrace();
+						System.exit(1);
 						logger.error("Exception in closure ", e);
 						fastSubClassSuccess = false;
 					}
 				} else {
-					fastSubClassSuccess = true;
+					logger.info("Too much data in subclass of "
+							+ mainTripleStore.getbyPredicate(
+									(int) AbstractDictionary.rdfssubClassOf)
+									.size());
+					fastSubClassSuccess = false;
 				}
 			}
 			if (rulesprofile.hasSubPropertyClosure()) {
@@ -407,14 +414,15 @@ public class Inferray {
 								mainTripleStore,
 								(int) dictionary.rdfssubPropertyOf,
 								config.exportSupport(), exportTriples);
-						fc.computeTransitiveClosure(this.config.getSortingAlgorithm());
+						fc.computeTransitiveClosure(this.config
+								.getSortingAlgorithm());
 						fastSubPropertySuccess = true;
 					} catch (final Exception e) {
 						logger.error("Exception in closure ", e);
 						fastSubPropertySuccess = false;
 					}
 				} else {
-					fastSubPropertySuccess = true;
+					fastSubPropertySuccess = false;
 				}
 
 			}
