@@ -4,8 +4,8 @@
   <artifactId>inferray-core</artifactId>
   <versioning>
     <versions>
-      <version>0.0.2-SNAPSHOT</version>
+      <version>0.0.3-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20141103090403</lastUpdated>
+    <lastUpdated>20151112142314</lastUpdated>
   </versioning>
 </metadata>
