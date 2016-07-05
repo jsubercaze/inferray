@@ -30,7 +30,7 @@ Export as a Jena Model :
 		model.rebind();
 				
 Then use the OntModel as usual with Jena. Inferray performs incremental inference when new triples are added and restart
-a full inference 
+a full inference whenever triples are deleted from the Model. 
 
 ## Configuration
 
