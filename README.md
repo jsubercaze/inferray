@@ -7,6 +7,30 @@ Inferray is cache-friendly forward-chaining reasoner that supports the following
 * RhoDF
 * RDFSPlus
 
+## Citation
+
+When using Inferray, please use the following citation :
+
+    Julien Subercaze, Christophe Gravier, Jules Chevalier, Frédérique Laforest:
+    Inferray: fast in-memory RDF inference. PVLDB 9(6): 468-479 (2016)
+    
+Bibtex :
+
+     @article{DBLP:journals/pvldb/SubercazeGCL16,
+     author    = {Julien Subercaze and
+               Christophe Gravier and
+               Jules Chevalier and
+               Fr{\'{e}}d{\'{e}}rique Laforest},
+     title     = {Inferray: fast in-memory {RDF} inference},
+     journal   = {{PVLDB}},
+     volume    = {9},
+     number    = {6},
+     pages     = {468--479},
+     year      = {2016},
+     url       = {http://www.vldb.org/pvldb/vol9/p468-subercaze.pdf}
+    }
+
+
 Inferray can be used either as a standalone reasoner (project inferray-core) or as a reasoner behind Jena (inferray bindings).
 
 ## Sample Use
