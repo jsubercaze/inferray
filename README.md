@@ -1,6 +1,5 @@
 Inferray
 ========
-
 Inferray is cache-friendly forward-chaining reasoner that supports the following rule sets : 
 * RDFS Full
 * RDFS Default
