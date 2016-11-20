@@ -61,7 +61,7 @@ You can configure advanced parameters of Inferray using the Configuration Builde
 
     final ConfigurationBuilder builder = new ConfigurationBuilder();
     final PropertyConfiguration config = builder
-					.setDumpFileOnExit(false).setForceQuickSort(false)
+					.setDumpFileOnExit(false)
 					.setMultithread(true).setThreadpoolSize(8)
 					.setFastClosure(true)
 					.setRulesProfile(SupportedProfile.RDFSPLUS)
